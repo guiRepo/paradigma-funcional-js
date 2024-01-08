@@ -1,17 +1,13 @@
-import { handlerStatus, log } from "./utils/promise-helpers.js";
-import './utils/array-helpers.js'
+import { log } from "./utils/promise-helpers.js";
+import { notasService as service } from "./nota/service.js";
+import "./utils/array-helpers.js";
 
-document
-.querySelector('#myButton')
-.onclick = () => 
-    fetch('http://localhost:3000/notas')
-    .then(handlerStatus)
-    .then(notas => notas
-        .$flatmap((nota => nota.itens))
-        .filter(item => item.codigo == '2143')
-        .reduce((total, item) => total + item.valor, 0)
-    )
+
+
+document.querySelector("#myButton").onclick = () =>
+  service
+    .sumItems("2143")
     .then(console.log)
-    .catch(console.log)
+    .catch(console.log);
 
-    // Functor => Todo aquele que pode ser realizado um map (Array)
+// Functor => Todo aquele que pode ser realizado um map (Array)
