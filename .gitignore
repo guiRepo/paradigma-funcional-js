@@ -1,6 +1,10 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-# Dependency directories
-node_modules
+# testing
+/coverage
 
-# dotenv environment variables file
-.env
+# production
+/build
