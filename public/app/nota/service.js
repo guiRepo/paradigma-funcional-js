@@ -1,5 +1,5 @@
 import { handlerStatus } from "../utils/promise-helpers.js";
-import { partialize } from "../utils/operators.js";
+import { partialize, compose } from "../utils/operators.js";
 
 const api = "http://localhost:3000/notas";
 
@@ -15,9 +15,13 @@ export const notasService = {
 
   sumItems(code) {
     const filterItems =  partialize(filterItemsByCode, code)
-    return this.listAll().then(sumItems(code));
+    const sumItems = compose(sumItemsValue, filterItems, getItemsFromNotas)
+
+    return this.listAll()
+      .then(sumItems);
   },
 };
 
 
 // Composição de funções / aplicação parcialm, transformando uma função com dois paramentros em um, usando o bind
+// point free function - sem referencias de paramentro
