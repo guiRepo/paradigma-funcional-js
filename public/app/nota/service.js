@@ -1,7 +1,6 @@
 import { handlerStatus } from "../utils/promise-helpers.js";
 
-
-const api = 'http://localhost:3000/notas'
+const api = "http://localhost:3000/notas";
 
 const sumItems = (code) => (notas) =>
   notas
@@ -9,13 +8,12 @@ const sumItems = (code) => (notas) =>
     .filter((item) => item.codigo == code)
     .reduce((total, item) => total + item.valor, 0);
 
-
 export const notasService = {
-    listAll() {
-        return fetch(api).then(handlerStatus);
-    },
+  listAll() {
+    return fetch(api).then(handlerStatus);
+  },
 
-    sumItems(code) {
-        return this.listAll().then(sumItems(code))
-    }
-}
+  sumItems(code) {
+    return this.listAll().then(sumItems(code));
+  },
+};
